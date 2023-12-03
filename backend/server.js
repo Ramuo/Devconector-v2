@@ -19,7 +19,7 @@ connectDB();
 //INITIALIZE EXPRESS
 const app = express();
 
-// Body parser middleware
+// Init Bodyparser middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
