@@ -8,7 +8,9 @@ import {
     unlikePost,
     commentPost,
     deleteComment
-} from '../controllers/postControllers.js'
+} from '../controllers/postControllers.js';
+
+import { protect } from "../middleware/authMiddleware.js";
 
 
 
@@ -16,7 +18,7 @@ const router = express.Router();
 
 
 router.route('/')
-    .post(createPost)
+    .post(protect, createPost)
     .get(getPosts);
 router.route('/like/:id').put(likePost);
 router.route('/unlike/:id').put(unlikePost);

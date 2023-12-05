@@ -1,11 +1,29 @@
 import Post from '../models/postModel.js';
+import User from '../models/userModel.js'
 import asyncHandler from '../middleware/asyncHandler.js';
 
 //@desc     Create Post
 //@route    POST api/posts
 //@access   Private
 const createPost = asyncHandler(async(req, res) => {
-    res.json(' Create Post');
+    //const user = await Post.findById(req.user.id).select('-password');
+    const user = await User.findById(req.user.id).select('-password');
+   
+    const newPost = new Post ({
+        text: req.body.text,
+        name: user.name,
+        avatar: user.avatar,
+        user: req.user.id
+    });
+
+    if(newPost){
+        const post = await newPost.save();
+        res.status(200).json(post);
+    }else{
+        res.status(400);
+        throw new Error('Publication créée avec succès')
+    }
+    
 });
 
 //@desc     Get all posts

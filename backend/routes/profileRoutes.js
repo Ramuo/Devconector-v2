@@ -11,22 +11,22 @@ import {
     deleteEducation,
     getGithub
 } from '../controllers/profileContollers.js'
-
+import {protect} from '../middleware/authMiddleware.js'
 
 
 const router = express.Router();
 
 router.route('/')
-    .post(createUpdateProfile)
+    .post(protect, createUpdateProfile)
     .get(getProfiles)
-    .delete(deleteProfile);
-router.route('/me').get(getProfile);
-router.route('/experience').put(addExperience);
-router.route('/education').put(addEducation);
+    .delete(protect, deleteProfile);
+router.route('/me').get(protect, getProfile);
+router.route('/experience').put(protect, addExperience);
+router.route('/education').put(protect, addEducation);
 router.route('/user/:id').get(getProfilesById);
-router.route('/experience/:id').delete(deleteExperience);
-router.route('/education/:id').delete(deleteEducation);
-router.route('/github/:id').get(getGithub);
+router.route('/experience/:id').delete(protect, deleteExperience);
+router.route('/education/:id').delete(protect, deleteEducation);
+router.route('/github/:username').get(getGithub);
 
 
 
