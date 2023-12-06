@@ -19,13 +19,13 @@ const router = express.Router();
 
 router.route('/')
     .post(protect, createPost)
-    .get(getPosts);
-router.route('/like/:id').put(likePost);
-router.route('/unlike/:id').put(unlikePost);
-router.route('/comment/:id').post(commentPost);
-router.route('/comment/:id/:id').delete(deleteComment);
+    .get(protect, getPosts);
+router.route('/like/:id').put(protect, likePost);
+router.route('/unlike/:id').put(protect, unlikePost);
+router.route('/comment/:id').post(protect, commentPost);
+router.route('/comment/:id/:comment_id').delete(protect, deleteComment);
 router.route('/:id')
-    .get(getPost)
-    .delete(deletePost);
+    .get(protect, getPost)
+    .delete(protect, deletePost);
 
 export default router;
