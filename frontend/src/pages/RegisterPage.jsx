@@ -1,25 +1,60 @@
 import {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Loader from '../components/Loader';
+import {toast} from 'react-toastify'
 import { FaUser } from "react-icons/fa";
 
-const RegisterPage = () => {
 
+
+import { useRegisterMutation } from '../slices/userApiSlice';
+import {setCredentials} from '../slices/authSlice';
+
+
+
+const RegisterPage = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPossword, setConfirmPassword] = useState('');
 
+    const [register, {isLoading}] = useRegisterMutation();
+
+    const {userInfo} = useSelector((state) => state.auth);
+
+    const {search} = useLocation();
+    const sp = new URLSearchParams(search);
+    const redirect = sp.get('redirect') || '/';
+
+
+    useEffect(() => {
+        if(userInfo){
+            navigate(redirect);
+        }
+    }, [navigate, userInfo, redirect]);
+
 
     //FUNCTION
     const submitHandler = async (e) => {
         e.preventDefault();
+
+        //Let'us check is the pwd match
         if(password !== confirmPossword){
-            console.log('Password do not match')
+            toast.error('Mot de passe et corfimer mot de passe ne sont pas identiques');
         }else{
-            console.log(name)
-        }
-    }
+            try {
+                const res = await register({name, email, password}).unwrap();
+                dispatch(setCredentials({...res }));
+                navigate(redirect);
+            } catch (err) {
+                toast.error(err?.data?.message || err.error);
+            }
+        };
+    };
 
     return (
     <main className="container">
@@ -75,9 +110,11 @@ const RegisterPage = () => {
             className="btn btn-primary" 
             value="S'inscrire" 
             />
+
+            {isLoading && <Loader/>}
         </form>
         <p className="my-1">
-            Vous avez déjà un compte? <Link to="/login">Se Connecter</Link>
+            Vous avez déjà un compte? <Link to={redirect ? `/redirect?redirect=${redirect}`: '/login'}>Se Connecter</Link>
         </p>
     </main>
     );

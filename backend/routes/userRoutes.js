@@ -1,6 +1,7 @@
 import express from "express";
 import {
     register,
+    logout
 } from '../controllers/userControllers.js';
 
 import {check, validationResult} from 'express-validator'
@@ -21,5 +22,6 @@ router.route('/').post([
     ).isLength({min: 6})
 ], register);
 
+router.route('/logout').post(logout);
 
 export default router;
