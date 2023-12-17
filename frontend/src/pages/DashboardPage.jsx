@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import Loader from '../components/Loader';
 import { FaUserPlus } from "react-icons/fa";
 import EditProfileHeader from '../components/EditProfileHeader';
+import ListExperience from '../components/ListExperience';
+import ListEducation from '../components/ListEducation';
 
 
 import { useGetProfileQuery } from '../slices/profileApiSlice';
@@ -37,6 +39,8 @@ const DashboardPage = () => {
                   <FaUserPlus/> Bienvenue {profile.user.name}
                 </p>
                 <EditProfileHeader/>
+                <ListExperience experience={profile.experience}/> 
+                <ListEducation education={profile.education}/> 
               </>
                     
             )}
