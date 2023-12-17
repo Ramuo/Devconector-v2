@@ -20,6 +20,10 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
+import CreateProfilePage from './pages/CreateProfilePage';
+import EditProfilePage from './pages/EditProfilePage';
+import AddExperiencePage from './pages/AddExperiencePage';
+import AddEducation from './pages/AddEducation';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +34,10 @@ const router = createBrowserRouter(
       
       <Route path='' element={<PrivateRoutes/>}>
         <Route path='/dashboard' element={<DashboardPage/>}/>
+        <Route path='/create-profile' element={<CreateProfilePage/>}/>
+        <Route path='/edit-profile' element={<EditProfilePage/>}/>
+        <Route path='/experience' element={<AddExperiencePage/>}/>
+        <Route path='/education' element={<AddEducation/>}/>
       </Route>
     </Route>
   )
