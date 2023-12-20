@@ -29,6 +29,16 @@ const Navbar = () => {
     const authLinks = (
         <ul>
             <li>
+                <Link to="/profiles">
+                    Dévelopeurs
+                </Link>
+            </li>
+            <li>
+                <Link to="/dashboard">
+                    <span className='hide-sm'>Tableau de board</span>
+                </Link>
+            </li>
+            <li>
                 <Link to="/dashboard"
                 onClick={logoutHandler}
                 >
@@ -42,7 +52,7 @@ const Navbar = () => {
     const guestLinks = (
         <ul>
             <li>
-                <Link to="/dashboard">Dévelopeurs</Link>
+                <Link to="/profiles">Dévelopeurs</Link>
             </li>
             <li>
                 <Link to="/register">S'inscrire</Link>

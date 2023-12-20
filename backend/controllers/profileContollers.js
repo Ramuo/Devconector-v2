@@ -123,6 +123,7 @@ const deleteProfile = asyncHandler(async(req, res) => {
   console.log(profile)
 
   if(profile){
+    await Post.deleteMany({user: req.user.id});
     await profile.deleteOne({user: req.user.id});
     await User.findByIdAndDelete({_id: req.user.id})
     res.status(200).json({message: 'Profil supprimé'});

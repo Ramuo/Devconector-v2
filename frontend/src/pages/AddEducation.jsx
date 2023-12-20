@@ -50,7 +50,7 @@ const AddEducationPage = () => {
                     <input 
                     type="text"
                     value={school} 
-                    placeholder="* Établissement" 
+                    placeholder="* École" 
                     name="title" 
                     required 
                     onChange={(e) => setSchool(e.target.value)}
@@ -72,7 +72,7 @@ const AddEducationPage = () => {
                     <input 
                     type="text" 
                     value={fieldofstudy} 
-                    placeholder="Ville & Pays" 
+                    placeholder="Domaine d'étude" 
                     name="Champs d'étude" 
                     onChange={(e) => setFieldofstudy(e.target.value)}
                     />
@@ -96,7 +96,7 @@ const AddEducationPage = () => {
                         checked={current} 
                         value={current} 
                         onChange={(e) => setCurrent(e.target.value, {current: !current })}
-                        /> {' '}Poste Actuel
+                        /> {' '} École Actuellement
                     </p>
                 </div>
 

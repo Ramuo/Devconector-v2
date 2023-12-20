@@ -149,7 +149,7 @@ const EditProfilePage = () => {
                     <input 
                     type="text" 
                     value={location}
-                    placeholder="Location" 
+                    placeholder="Ville & Pays" 
                     name="location"
                     onChange={(e) => setLocation(e.target.value)} 
                     />

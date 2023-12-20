@@ -24,6 +24,8 @@ import CreateProfilePage from './pages/CreateProfilePage';
 import EditProfilePage from './pages/EditProfilePage';
 import AddExperiencePage from './pages/AddExperiencePage';
 import AddEducation from './pages/AddEducation';
+import ProfilesPage from './pages/ProfilesPage';
+import ProfilePage from './pages/ProfilePage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,6 +33,8 @@ const router = createBrowserRouter(
       <Route index={true} path='/' element={<HomePage />} />
       <Route path='/login' element={<LoginPage/>}/>
       <Route path='/register' element={<RegisterPage/>}/>
+      <Route path='/profiles' element={<ProfilesPage/>}/>
+      <Route path='/profile/:id' element={<ProfilePage/>}/>
       
       <Route path='' element={<PrivateRoutes/>}>
         <Route path='/dashboard' element={<DashboardPage/>}/>

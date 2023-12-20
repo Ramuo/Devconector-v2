@@ -1,6 +1,8 @@
 import {apiSlice} from './apiSlice';
 import { PROFILE_URL } from '../constants';
 
+const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
+console.log(GITHUB_TOKEN )
 
 const profileSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -32,6 +34,48 @@ const profileSlice = apiSlice.injectEndpoints({
                 body: data
             }),
         }),
+        deleteExperience: builder.mutation({
+            query: (id) => ({
+                url: `${PROFILE_URL}/experience/${id}`,
+                method: 'DELETE'
+            }),
+        }),
+        deleteEducation: builder.mutation({
+            query: (id) => ({
+                url: `${PROFILE_URL}/education/${id}`,
+                method: 'DELETE'
+            }),
+        }),
+        deleteProfile: builder.mutation({
+            query: () => ({
+                url: PROFILE_URL,
+                method: 'DELETE'
+            }),
+        }),
+        getProfiles: builder.query({
+            query: () => ({
+                url: PROFILE_URL,
+            }),
+            providesTags: ['Profile'],
+            keepUnusedDataFor: 5
+        }),
+        getProfileById: builder.query({
+            query: (userId) => ({
+                url: `${PROFILE_URL}/user/${userId}`
+            }),
+            keepUnusedDataFor: 5
+        }),
+        getGitHubRepos: builder.query({
+            query: (username) => ({
+                url: `${PROFILE_URL}/github/${username}`
+            }),
+            headers : {
+                'user-agent': 'node.js',
+                 Authorization: `token ${GITHUB_TOKEN}`,
+            },
+            keepUnusedDataFor: 5,
+            providesTags: ['Profile']
+        }),
     }),
 });
 
@@ -41,4 +85,10 @@ export const {
     useCreateProfileMutation,
     useAddExperianceMutation,
     useAddEducationMutation,
+    useDeleteExperienceMutation,
+    useDeleteEducationMutation,
+    useDeleteProfileMutation,
+    useGetProfilesQuery,
+    useGetProfileByIdQuery,
+    useGetGitHubReposQuery,
 } = profileSlice;

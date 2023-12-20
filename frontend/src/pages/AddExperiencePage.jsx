@@ -13,7 +13,7 @@ const AddExperiencePage = () => {
     const [title, setTitle] = useState('');
     const [location, setLocation] = useState('');
     const [from, setFrom] = useState('');
-    const [to, setTo] = useState('');
+    const [to, setTo] = useState(' ');
     const [current, setCurrent] = useState(false);
     const [description, setDescription] = useState('');
 
@@ -97,7 +97,7 @@ const AddExperiencePage = () => {
                         checked={current} 
                         value={current} 
                         onChange={(e) => setCurrent(e.target.value, {current: !current })}
-                        /> {' '}Poste Actuel
+                        /> {' '}Poste Actuellement
                     </p>
                 </div>
 
@@ -107,7 +107,7 @@ const AddExperiencePage = () => {
                     type="date" 
                     value={to} 
                     name="to" 
-                    onChange={(e) => setTo(e.target.value)}
+                    onChange={(e) =>setTo(e.target.value)}
                     disabled={current }
                     />
                 </div>

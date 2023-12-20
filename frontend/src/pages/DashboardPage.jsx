@@ -1,16 +1,21 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Loader from '../components/Loader';
-import { FaUserPlus } from "react-icons/fa";
+import { FaUserPlus, FaUserMinus } from "react-icons/fa";
 import EditProfileHeader from '../components/EditProfileHeader';
 import ListExperience from '../components/ListExperience';
 import ListEducation from '../components/ListEducation';
+import {toast} from 'react-toastify';
 
 
-import { useGetProfileQuery } from '../slices/profileApiSlice';
+
+import {
+  useGetProfileQuery,
+  useDeleteProfileMutation,
+} from '../slices/profileApiSlice';
 
 const DashboardPage = () => {
-
+  const navigate = useNavigate();
   const {
     data: profile,
     isLoading,
@@ -18,7 +23,21 @@ const DashboardPage = () => {
     error
   } = useGetProfileQuery();
 
- console.log(profile)
+
+  const [deleteProfile, {isLoading: isLoadingDeleteProfile}] = useDeleteProfileMutation();
+
+  const deleteProfileHandler = async () =>{
+    if(window.confirm("Êtes-vous sûr de supprimer votre compte ?")){
+      try {
+        await deleteProfile();
+        toast.warning("Le compte a été supprimé")
+        navigate('/login');
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
+  }
+
 
   return(
     <main className="container">
@@ -41,6 +60,16 @@ const DashboardPage = () => {
                 <EditProfileHeader/>
                 <ListExperience experience={profile.experience}/> 
                 <ListEducation education={profile.education}/> 
+
+                <div className="my-2">
+                  <button 
+                  className="btn btn-danger"
+                  onClick={() => deleteProfileHandler()}
+                  >
+                    <FaUserMinus/> Supprimer votre Compte
+                  </button>
+                  {isLoadingDeleteProfile && <Loader/>}
+                </div>
               </>
                     
             )}
