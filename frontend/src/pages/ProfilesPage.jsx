@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+
 import { Link } from 'react-router-dom';
 import Loader from '../components/Loader';
 import {FaConnectdevelop} from 'react-icons/fa';
@@ -12,10 +12,9 @@ const ProfilesPage = () => {
     data: profiles, 
     isLoading, 
     error, 
-    refetch
   }= useGetProfilesQuery();
 
-  console.log(profiles)
+
   return (
     <main className='container'>
       {isLoading ? (

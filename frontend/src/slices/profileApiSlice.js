@@ -2,7 +2,7 @@ import {apiSlice} from './apiSlice';
 import { PROFILE_URL } from '../constants';
 
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
-console.log(GITHUB_TOKEN )
+
 
 const profileSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({

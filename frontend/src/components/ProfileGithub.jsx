@@ -4,12 +4,14 @@ import Loader from './Loader';
 
 import { useGetGitHubReposQuery } from "../slices/profileApiSlice"
 
+
+
 const ProfileGithub = ({username}) => {
     const {
         data: repos,
         isLoading,
     }= useGetGitHubReposQuery(username);
-    console.log(repos)
+   
   return (
     <div className="profile-github">
         <h2 className="text-primary my-1">Github Repos</h2>
@@ -48,4 +50,4 @@ const ProfileGithub = ({username}) => {
   )
 }
 
-export default ProfileGithub
+export default ProfileGithub;

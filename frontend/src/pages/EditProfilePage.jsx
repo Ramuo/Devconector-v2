@@ -65,6 +65,7 @@ const EditProfilePage = () => {
     e.preventDefault();
     try {
       await updateProfile({company, website, location, status, skills, githubusername, bio, twitter, facebook, linkedin, instagram, youtube}).unwrap();
+      refetch();
       toast.success('Profil mis à jour avec succès ');
       refetch();
       navigate('/dashboard');

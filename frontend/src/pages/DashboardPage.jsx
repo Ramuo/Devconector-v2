@@ -30,6 +30,7 @@ const DashboardPage = () => {
     if(window.confirm("Êtes-vous sûr de supprimer votre compte ?")){
       try {
         await deleteProfile();
+        refetch();
         toast.warning("Le compte a été supprimé")
         navigate('/login');
       } catch (err) {

@@ -125,7 +125,6 @@ const commentPost = asyncHandler(async(req, res) => {
         const user = await User.findById(req.user.id).select('-password');
         const post = await Post.findById(req.params.id);
 
-        
         const newComment = {
             text: req.body.text,
             name: user.name,
@@ -136,12 +135,14 @@ const commentPost = asyncHandler(async(req, res) => {
         post.comments.unshift(newComment);
 
         await post.save();
-        res.status(200).json(post.comments);
+
+        res.json(post.comments);
     } catch (error) {
-        console.error(err.message);
         res.status(404);
         throw new Error("Publication non créée, une erreur s'est produite")
     }
+
+    
 });
 
 //@desc     Delete comment

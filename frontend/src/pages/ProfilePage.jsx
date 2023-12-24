@@ -5,7 +5,7 @@ import Loader from '../components/Loader';
 import ProfileTop from '../components/ProfileTop';
 import ProfileAbout from '../components/ProfileAbout';
 import ProfileExperience from '../components/ProfileExperience';
-import ProfileEducation from '../components/Profile.Education';
+import ProfileEducation from '../components/ProfileEducation';
 import ProfileGithub from '../components/ProfileGithub';
 
 
@@ -21,8 +21,6 @@ const ProfilePage = () => {
     const {
         data: userProfile,
         isLoading,
-        refetch,
-        error,
     } = useGetProfileByIdQuery(profileId);
 
     const {userInfo} = useSelector((state) => state.auth);

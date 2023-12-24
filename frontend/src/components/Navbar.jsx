@@ -34,6 +34,11 @@ const Navbar = () => {
                 </Link>
             </li>
             <li>
+                <Link to="/posts">
+                    Publications
+                </Link>
+            </li>
+            <li>
                 <Link to="/dashboard">
                     <span className='hide-sm'>Tableau de board</span>
                 </Link>
